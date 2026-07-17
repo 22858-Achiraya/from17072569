@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ฟอร์มเก็บข้อมูลนักเรียน 🎒</title>
-    <!-- เรียกใช้ฟอนต์ภาษาไทยจาก Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>แบบฟอร์มลงทะเบียนนักเรียน 🎒✨</title>
+    <!-- เรียกใช้ฟอนต์ Prompt จาก Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* ตั้งค่าพื้นฐานและการจัดวางให้อยู่กึ่งกลาง */
+        :root {
+            /* กำหนดตัวแปรสีตามโทนที่ต้องการ */
+            --color-white: #ffffff;
+            --color-light-blue: #e0f2fe;
+            --color-blue: #3b82f6;
+            --color-dark-blue: #1e3a8a;
+            --color-purple: #a855f7;
+            --color-pink: #ec4899;
+            --color-light-pink: #fce7f3;
+            --color-border: #cbd5e1;
+            --color-text: #334155;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -16,10 +28,9 @@
 
         body {
             font-family: 'Prompt', sans-serif;
-            background-color: #e0f2fe; /* พื้นหลังสีฟ้าอ่อน */
-            background-image: radial-gradient(#bae6fd 2px, transparent 2px); /* ลายจุดน่ารักๆ */
-            background-size: 30px 30px;
-            color: #333;
+            /* พื้นหลังไล่สี ฟ้า -> ชมพู -> ม่วง */
+            background: linear-gradient(135deg, #e0f2fe 0%, #fce7f3 50%, #f3e8ff 100%);
+            color: var(--color-text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -28,77 +39,91 @@
         }
 
         .form-container {
-            background-color: #ffffff;
+            background-color: var(--color-white);
             width: 100%;
-            max-width: 800px;
+            max-width: 900px;
             padding: 40px;
-            border-radius: 24px;
-            box-shadow: 0 10px 25px rgba(2, 132, 199, 0.1);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(168, 85, 247, 0.15);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* ส่วนหัวของฟอร์ม */
+        /* ตกแต่งส่วนหัว */
         .form-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .form-header h1 {
-            color: #0284c7; /* สีฟ้าเข้ม */
-            font-size: 28px;
+            color: var(--color-dark-blue);
+            font-size: 32px;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .form-header p {
-            color: #7dd3fc;
+            color: var(--color-purple);
+            font-size: 16px;
         }
 
-        .cute-character {
-            font-size: 40px;
+        .mascot {
+            font-size: 45px;
             margin-bottom: 10px;
         }
 
-        /* การตกแต่ง Fieldset และ Legend */
+        /* การจัดกลุ่ม Fieldset */
         fieldset {
-            border: 2px solid #bae6fd;
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 25px;
-            background-color: #f8fafc;
+            border: 2px dashed #c084fc;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            background-color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+
+        fieldset:hover {
+            border-color: var(--color-pink);
+            background-color: var(--color-white);
+            box-shadow: 0 5px 15px rgba(236, 72, 153, 0.05);
         }
 
         legend {
-            background-color: #38bdf8;
-            color: white;
-            padding: 5px 20px;
-            border-radius: 20px;
+            /* ป้ายชื่อหัวข้อไล่สี น้ำเงิน -> ม่วง -> ชมพู */
+            background: linear-gradient(to right, var(--color-blue), var(--color-purple), var(--color-pink));
+            color: var(--color-white);
+            padding: 8px 25px;
+            border-radius: 25px;
             font-weight: 500;
-            font-size: 16px;
-            box-shadow: 0 4px 6px rgba(56, 189, 248, 0.2);
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(168, 85, 247, 0.3);
         }
 
-        /* การจัดวาง Grid สำหรับ Input */
+        /* Grid Layout สำหรับ Input */
         .form-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         .form-group {
             display: flex;
             flex-direction: column;
-            margin-bottom: 10px;
         }
 
         .full-width {
             grid-column: 1 / -1;
         }
 
-        /* การตกแต่ง Input Elements */
+        /* ตกแต่ง Label และ Input */
         label {
-            margin-bottom: 5px;
-            font-weight: 400;
-            font-size: 14px;
-            color: #0369a1;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--color-dark-blue);
+            font-size: 15px;
         }
 
         input[type="text"],
@@ -110,104 +135,147 @@
         select,
         textarea {
             width: 100%;
-            padding: 10px 15px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 10px;
+            padding: 12px 16px;
+            border: 2px solid var(--color-light-blue);
+            border-radius: 12px;
             font-family: inherit;
-            font-size: 14px;
+            font-size: 15px;
             transition: all 0.3s ease;
+            background-color: #f8fafc;
             outline: none;
         }
 
         input:focus, select:focus, textarea:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+            border-color: var(--color-purple);
+            background-color: var(--color-white);
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15);
         }
 
         textarea {
             resize: vertical;
-            min-height: 80px;
+            min-height: 100px;
         }
 
         input[type="color"] {
             padding: 2px;
-            height: 40px;
+            height: 45px;
             cursor: pointer;
+            border-radius: 12px;
         }
 
-        /* Radio & Checkbox */
-        .radio-group, .checkbox-group {
+        /* Custom Radio & Checkbox */
+        .option-group {
             display: flex;
-            gap: 15px;
-            align-items: center;
+            gap: 20px;
             flex-wrap: wrap;
-            margin-top: 5px;
+            padding: 10px 0;
         }
 
-        .radio-group label, .checkbox-group label {
+        .option-group label {
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 8px;
             cursor: pointer;
-            color: #333;
             font-weight: 400;
+            color: var(--color-text);
+        }
+
+        input[type="radio"], input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--color-pink);
+            cursor: pointer;
         }
 
         /* File Upload */
         input[type="file"] {
             padding: 10px;
-            background-color: white;
-            border: 1.5px dashed #7dd3fc;
+            background-color: var(--color-light-pink);
+            border: 2px dashed var(--color-pink);
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--color-text);
+        }
+
+        /* Terms & Conditions */
+        .terms-group {
+            background-color: var(--color-light-blue);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 25px;
+            border: 1px solid #bae6fd;
+        }
+
+        .terms-group label {
+            color: var(--color-dark-blue);
+            font-weight: 600;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             cursor: pointer;
         }
 
-        /* Buttons */
+        /* ปุ่ม Buttons */
         .button-group {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             justify-content: center;
-            margin-top: 30px;
         }
 
         button {
-            padding: 12px 30px;
+            padding: 14px 40px;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             font-family: inherit;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 600;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
         }
 
         button[type="submit"] {
-            background-color: #0284c7;
-            color: white;
-            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+            background: linear-gradient(to right, var(--color-blue), var(--color-purple));
+            color: var(--color-white);
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
 
         button[type="submit"]:hover {
-            background-color: #0369a1;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(168, 85, 247, 0.5);
+            background: linear-gradient(to right, var(--color-purple), var(--color-pink));
         }
 
         button[type="reset"] {
-            background-color: #e2e8f0;
-            color: #475569;
+            background-color: #f1f5f9;
+            color: #64748b;
+            border: 2px solid var(--color-border);
         }
 
         button[type="reset"]:hover {
-            background-color: #cbd5e1;
+            background-color: #e2e8f0;
+            color: var(--color-pink);
+            border-color: var(--color-pink);
             transform: translateY(-2px);
         }
 
-        /* Responsive Design */
-        @media (max-width: 600px) {
+        /* Responsive Design สำหรับมือถือ */
+        @media (max-width: 768px) {
             .form-grid {
                 grid-template-columns: 1fr;
             }
             .form-container {
-                padding: 20px;
+                padding: 25px 20px;
+            }
+            .form-header h1 {
+                font-size: 24px;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
             }
         }
     </style>
@@ -216,9 +284,9 @@
 
     <div class="form-container">
         <div class="form-header">
-            <div class="cute-character">👦👧🎓</div>
-            <h1>ฟอร์มลงทะเบียนนักเรียน</h1>
-            <p>กรุณากรอกข้อมูลให้ครบถ้วนเพื่อประโยชน์ของตัวท่านเอง</p>
+            <div class="mascot">👩‍🎓📚🦄</div>
+            <h1>แบบฟอร์มบันทึกข้อมูลนักเรียน</h1>
+            <p>กรุณากรอกข้อมูลให้ครบถ้วนและถูกต้อง (✩ ⋆ ✩ ⋆ ✩ ⋆ ✩)</p>
         </div>
 
         <form action="#" method="POST" enctype="multipart/form-data">
@@ -230,7 +298,7 @@
                     <div class="form-group">
                         <label for="title">คำนำหน้า</label>
                         <select id="title" name="title" required>
-                            <option value="">-- เลือก --</option>
+                            <option value="">-- เลือกคำนำหน้า --</option>
                             <option value="ด.ช.">เด็กชาย (ด.ช.)</option>
                             <option value="ด.ญ.">เด็กหญิง (ด.ญ.)</option>
                             <option value="นาย">นาย</option>
@@ -239,15 +307,15 @@
                     </div>
                     <div class="form-group">
                         <label for="fullname">ชื่อ-นามสกุล</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="เช่น สมชาย ใจดี" required>
+                        <input type="text" id="fullname" name="fullname" placeholder="ตัวอย่าง: สมหญิง รักเรียน" required>
                     </div>
                     <div class="form-group">
                         <label for="nickname">ชื่อเล่น</label>
-                        <input type="text" id="nickname" name="nickname" placeholder="เช่น บอย">
+                        <input type="text" id="nickname" name="nickname" placeholder="ตัวอย่าง: หญิง">
                     </div>
                     <div class="form-group">
                         <label for="studentid">เลขประจำตัวนักเรียน</label>
-                        <input type="text" id="studentid" name="studentid" pattern="[0-9]{5,10}" placeholder="ระบุตัวเลขเท่านั้น" required>
+                        <input type="number" id="studentid" name="studentid" placeholder="ระบุตัวเลขประจำตัว" required>
                     </div>
                     <div class="form-group">
                         <label for="birthdate">วันเดือนปีเกิด</label>
@@ -255,26 +323,26 @@
                     </div>
                     <div class="form-group">
                         <label for="age">อายุ (ปี)</label>
-                        <input type="number" id="age" name="age" min="1" max="100" placeholder="เช่น 15">
+                        <input type="number" id="age" name="age" min="1" max="100" placeholder="ตัวอย่าง: 16" required>
                     </div>
                 </div>
             </fieldset>
 
             <!-- 2. ข้อมูลการติดต่อ -->
             <fieldset>
-                <legend>📱 2. ข้อมูลการติดต่อ</legend>
+                <legend>📞 2. ข้อมูลการติดต่อ</legend>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="email">อีเมล</label>
-                        <input type="email" id="email" name="email" placeholder="example@email.com">
+                        <label for="email">อีเมล (Email)</label>
+                        <input type="email" id="email" name="email" placeholder="example@school.ac.th" required>
                     </div>
                     <div class="form-group">
                         <label for="phone">เบอร์โทรศัพท์</label>
-                        <input type="tel" id="phone" name="phone" placeholder="08xxxxxxxx" pattern="[0-9]{10}">
+                        <input type="tel" id="phone" name="phone" placeholder="08x-xxx-xxxx" pattern="[0-9]{10}" required>
                     </div>
                     <div class="form-group full-width">
                         <label for="address">ที่อยู่ปัจจุบัน</label>
-                        <textarea id="address" name="address" placeholder="บ้านเลขที่ หมู่ ซอย ถนน ตำบล อำเภอ..."></textarea>
+                        <textarea id="address" name="address" placeholder="บ้านเลขที่, หมู่, ถนน, ตำบล, อำเภอ, รหัสไปรษณีย์..." required></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -285,29 +353,30 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>เพศ</label>
-                        <div class="radio-group">
-                            <label><input type="radio" name="gender" value="ชาย" required> ชาย</label>
-                            <label><input type="radio" name="gender" value="หญิง"> หญิง</label>
-                            <label><input type="radio" name="gender" value="อื่นๆ"> อื่นๆ</label>
+                        <div class="option-group">
+                            <label><input type="radio" name="gender" value="ชาย" required> 👦 ชาย</label>
+                            <label><input type="radio" name="gender" value="หญิง"> 👧 หญิง</label>
+                            <label><input type="radio" name="gender" value="อื่นๆ"> 🌈 อื่นๆ</label>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="religion">ศาสนา</label>
-                        <select id="religion" name="religion">
+                        <select id="religion" name="religion" required>
                             <option value="พุทธ">พุทธ</option>
                             <option value="คริสต์">คริสต์</option>
                             <option value="อิสลาม">อิสลาม</option>
-                            <option value="อื่นๆ">อื่นๆ</option>
+                            <option value="พราหมณ์-ฮินดู">พราหมณ์-ฮินดู</option>
+                            <option value="อื่นๆ/ไม่มีศาสนา">อื่นๆ / ไม่มีศาสนา</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="province">ภูมิลำเนา (จังหวัด)</label>
-                        <input type="text" id="province" name="province" placeholder="เช่น กรุงเทพมหานคร">
+                        <input type="text" id="province" name="province" placeholder="ตัวอย่าง: เชียงใหม่">
                     </div>
                     <div class="form-group">
                         <label for="bloodtype">กรุ๊ปเลือด</label>
-                        <select id="bloodtype" name="bloodtype">
-                            <option value="">-- ไม่ทราบ --</option>
+                        <select id="bloodtype" name="bloodtype" required>
+                            <option value="">-- เลือกกรุ๊ปเลือด --</option>
                             <option value="A">A</option>
                             <option value="B">B</option>
                             <option value="AB">AB</option>
@@ -323,19 +392,20 @@
                 <div class="form-grid">
                     <div class="form-group full-width">
                         <label>งานอดิเรก (เลือกได้มากกว่า 1 ข้อ)</label>
-                        <div class="checkbox-group">
+                        <div class="option-group">
                             <label><input type="checkbox" name="hobby" value="อ่านหนังสือ"> 📖 อ่านหนังสือ</label>
+                            <label><input type="checkbox" name="hobby" value="เล่นดนตรี"> 🎸 เล่นดนตรี</label>
+                            <label><input type="checkbox" name="hobby" value="วาดรูป"> 🎨 วาดรูป</label>
                             <label><input type="checkbox" name="hobby" value="เล่นกีฬา"> ⚽ เล่นกีฬา</label>
-                            <label><input type="checkbox" name="hobby" value="ฟังเพลง"> 🎵 ฟังเพลง</label>
                             <label><input type="checkbox" name="hobby" value="เล่นเกม"> 🎮 เล่นเกม</label>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="favcolor">สีที่ชอบ</label>
-                        <input type="color" id="favcolor" name="favcolor" value="#38bdf8">
+                        <label for="favcolor">สีที่ชอบ (คลิกเพื่อเลือกสี)</label>
+                        <input type="color" id="favcolor" name="favcolor" value="#a855f7">
                     </div>
                     <div class="form-group">
-                        <label for="website">เว็บไซต์ที่ชอบ</label>
+                        <label for="website">เว็บไซต์ที่ชื่นชอบ</label>
                         <input type="url" id="website" name="website" placeholder="https://www.example.com">
                     </div>
                 </div>
@@ -343,12 +413,12 @@
 
             <!-- 5. ข้อมูลการศึกษา -->
             <fieldset>
-                <legend>📚 5. ข้อมูลการศึกษา</legend>
+                <legend>🎓 5. ข้อมูลการศึกษา</legend>
                 <div class="form-grid">
                     <div class="form-group">
                         <label for="grade">ระดับชั้น</label>
                         <select id="grade" name="grade" required>
-                            <option value="">-- เลือก --</option>
+                            <option value="">-- เลือกระดับชั้น --</option>
                             <option value="ม.1">มัธยมศึกษาปีที่ 1</option>
                             <option value="ม.2">มัธยมศึกษาปีที่ 2</option>
                             <option value="ม.3">มัธยมศึกษาปีที่ 3</option>
@@ -358,31 +428,31 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="room">ห้องเรียน</label>
-                        <input type="number" id="room" name="room" min="1" max="20" placeholder="เช่น 1">
+                        <label for="room">ห้องเรียน (ระบุเป็นตัวเลข)</label>
+                        <input type="number" id="room" name="room" min="1" max="20" placeholder="ตัวอย่าง: 1" required>
                     </div>
                     <div class="form-group">
                         <label for="major">แผนการเรียน</label>
-                        <input type="text" id="major" name="major" placeholder="เช่น วิทย์-คณิต">
+                        <input type="text" id="major" name="major" placeholder="ตัวอย่าง: วิทย์-คณิต, ศิลป์-ภาษา" required>
                     </div>
                     <div class="form-group">
-                        <label for="gpa">เกรดเฉลี่ย (GPA)</label>
-                        <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4" placeholder="0.00 - 4.00">
+                        <label for="gpa">เกรดเฉลี่ยสะสม (GPA)</label>
+                        <input type="number" id="gpa" name="gpa" step="0.01" min="0" max="4.00" placeholder="ตัวอย่าง: 3.50">
                     </div>
                 </div>
             </fieldset>
 
             <!-- 6. การอัปโหลดไฟล์ -->
             <fieldset>
-                <legend>📁 6. การอัปโหลดไฟล์</legend>
+                <legend>📂 6. การอัปโหลดไฟล์</legend>
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="profilepic">รูปภาพประจำตัว (JPG, PNG)</label>
-                        <input type="file" id="profilepic" name="profilepic" accept="image/*">
+                        <label for="profile_pic">รูปภาพประจำตัว (อัปโหลดรูปภาพ)</label>
+                        <input type="file" id="profile_pic" name="profile_pic" accept="image/*" required>
                     </div>
                     <div class="form-group">
-                        <label for="document">เอกสารเพิ่มเติม (PDF, DOC)</label>
-                        <input type="file" id="document" name="document" accept=".pdf,.doc,.docx">
+                        <label for="documents">เอกสารเพิ่มเติม (PDF, DOCX)</label>
+                        <input type="file" id="documents" name="documents" accept=".pdf, .doc, .docx">
                     </div>
                 </div>
             </fieldset>
@@ -390,23 +460,23 @@
             <!-- 7. ความคิดเห็นเพิ่มเติม -->
             <fieldset>
                 <legend>💬 7. ความคิดเห็นเพิ่มเติม</legend>
-                <div class="form-group">
-                        <label for="comments">ข้อเสนอแนะ หรือข้อมูลที่ต้องการแจ้งให้ทราบ</label>
-                        <textarea id="comments" name="comments" placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
+                <div class="form-group full-width">
+                    <label for="comments">ข้อเสนอแนะหรือสิ่งที่อยากบอกคุณครู 💖</label>
+                    <textarea id="comments" name="comments" placeholder="พิมพ์ข้อความของคุณที่นี่..."></textarea>
                 </div>
             </fieldset>
 
-            <!-- 8. ยืนยันข้อมูล -->
-            <div class="form-group" style="text-align: center; margin-top: 20px;">
-                <label style="display: inline-flex; align-items: center; gap: 10px; cursor: pointer; color: #0284c7; font-weight: 500;">
-                    <input type="checkbox" name="agreement" required style="width: 18px; height: 18px;">
-                    ข้าพเจ้ายืนยันว่าข้อมูลทั้งหมดถูกต้องและเป็นความจริง
+            <!-- 8. ยืนยันข้อมูลและปุ่มดำเนินการ -->
+            <div class="terms-group">
+                <label>
+                    <input type="checkbox" name="terms" required>
+                    ข้าพเจ้ายืนยันว่าข้อมูลข้างต้นเป็นความจริงทุกประการ และยอมรับเงื่อนไขการใช้งาน
                 </label>
             </div>
 
             <div class="button-group">
-                <button type="submit">ส่งข้อมูล 🚀</button>
-                <button type="reset">ล้างข้อมูล 🔄</button>
+                <button type="submit">✨ ส่งข้อมูลเลย!</button>
+                <button type="reset">🧹 ล้างข้อมูล</button>
             </div>
 
         </form>
